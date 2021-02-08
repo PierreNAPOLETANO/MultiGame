@@ -54,7 +54,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/square_corner"
             android:hint="@string/create_player_age"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:paddingStart="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp" />

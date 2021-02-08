@@ -8,4 +8,6 @@
     <string name="create_player_localisation">Localisation</string>
     <string name="create_player_player">Joueur</string>
     <string name="create_player_validate">Valider</string>
+    <string name="location_lat_lng">Lat : %.2f Lon : %.2f</string>
+    <string name="display_player_title">Liste de joueurs</string>
 </resources>
