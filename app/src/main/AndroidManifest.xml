@@ -26,5 +26,9 @@
         <activity
             android:name=".activity.CreatePlayerActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.DisplayPlayerActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

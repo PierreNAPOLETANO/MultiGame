@@ -19,6 +19,7 @@ import com.example.multigame.R;
 import com.example.multigame.dao.AppDatabase;
 import com.example.multigame.databinding.ActivityCreatePlayerBinding;
 import com.example.multigame.model.Player;
+import com.example.multigame.utils.ActivityUtils;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
@@ -54,6 +55,13 @@ public class CreatePlayerActivity extends AppCompatActivity {
                             Manifest.permission.ACCESS_FINE_LOCATION
                     }, REQUEST_LOCALISATION_PERMISSION);
                 }
+            }
+        });
+
+        binding.createPlayerPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityUtils.launchActivity(CreatePlayerActivity.this, DisplayPlayerActivity.class,false, true);
             }
         });
 
