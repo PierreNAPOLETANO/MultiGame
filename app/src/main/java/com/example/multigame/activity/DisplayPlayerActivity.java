@@ -30,7 +30,8 @@ public class DisplayPlayerActivity extends AppCompatActivity {
             playerList.add(new Player("pic","name"+i,"prenom" + i,12,"loc"));
         }
         binding.displayPlayersRv.setLayoutManager(new LinearLayoutManager(this));
-        binding.displayPlayersRv.setAdapter(new PlayerAdapter(AppDatabase.getDatabase(this).appDao().getAllPlayers()));
+        binding.displayPlayersRv.setAdapter(new PlayerAdapter(this,
+                AppDatabase.getDatabase(this).appDao().getAllPlayers()));
        // binding.displayPlayersRv.setAdapter(new PlayerAdapter(playerList));
     }
 }

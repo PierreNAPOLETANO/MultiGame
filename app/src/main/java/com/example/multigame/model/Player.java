@@ -14,6 +14,10 @@ public class Player {
     private String firstName;
     private int age;
     private String localisation;
+    private int dragNDropScore;
+    private int swipeScore;
+    private int fastTapScore;
+    private int ipacScore;
 
     public Player(String picture, String name, String firstName, int age, String localisation){
         setPicture(picture);
@@ -21,6 +25,10 @@ public class Player {
         setFirstName(firstName);
         setAge(age);
         setLocalisation(localisation);
+        setDragNDropScore(0);
+        setSwipeScore(0);
+        setFastTapScore(0);
+        setIpacScore(0);
     }
 
     public String getPicture() {
@@ -61,5 +69,35 @@ public class Player {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getDragNDropScore() {
+        return dragNDropScore;
+    }
+
+    public void setDragNDropScore(int dragNDropScore) { this.dragNDropScore = dragNDropScore; }
+
+    public int getSwipeScore() {
+        return swipeScore;
+    }
+
+    public void setSwipeScore(int swipeScore) {
+        this.swipeScore = swipeScore;
+    }
+
+    public int getFastTapScore() {
+        return fastTapScore;
+    }
+
+    public void setFastTapScore(int fastTapScore) {
+        this.fastTapScore = fastTapScore;
+    }
+
+    public int getIpacScore() {
+        return ipacScore;
+    }
+
+    public void setIpacScore(int ipacScore) {
+        this.ipacScore = ipacScore;
     }
 }

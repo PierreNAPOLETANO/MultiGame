@@ -10,4 +10,27 @@
     <string name="create_player_validate">Valider</string>
     <string name="location_lat_lng">Lat : %.2f Lon : %.2f</string>
     <string name="display_player_title">Liste de joueurs</string>
+
+    <string name="drag_n_drop">Drag n Drop</string>
+    <string name="fast_tap">Fast tap</string>
+    <string name="ipac_fragment">Ipac</string>
+    <string name="settings">Parametres</string>
+    <string name="swipe">Swipe</string>
+    <string name="time_left">Temps restant : %d</string>
+    <string name="score">Score : %d</string>
+    <string name="tap">Tap</string>
+    <string name="long_tap">Long Tap</string>
+    <string name="start">Commencer !</string>
+    <string name="menu">Menu</string>
+    <string name="exit">Quitter</string>
+    <string name="final_score">Votre score est de : \n%d</string>
+
+    <string name="swipe_right">Swipe droite</string>
+    <string name="swipe_left">Swipe gauche</string>
+    <string name="swipe_down">Swipe bas</string>
+    <string name="swipe_up">Swipe haut</string>
+
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_disconnection">Déconnexion</string>
+    <string name="settings_change_player">Changer de joueur</string>
 </resources>

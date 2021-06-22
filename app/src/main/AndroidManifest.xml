@@ -30,5 +30,13 @@
         <activity
             android:name=".activity.DisplayPlayerActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.FinishActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

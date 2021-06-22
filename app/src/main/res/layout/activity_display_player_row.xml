@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/square_corner"
     android:gravity="center"
+    android:id="@+id/player_row_container"
     android:orientation="horizontal"
     android:padding="20dp">
 

@@ -1,13 +1,24 @@
-package com.example.multigame.activity;
+package com.example.mds_multigame.activity;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.mds_multigame.R;
+import com.example.mds_multigame.dao.AppDatabase;
+import com.example.mds_multigame.databinding.ActivityCreatePlayerBinding;
+import com.example.mds_multigame.model.Player;
+import com.example.mds_multigame.utils.ActivityUtils;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,18 +26,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
-import com.example.multigame.R;
-import com.example.multigame.dao.AppDatabase;
-import com.example.multigame.databinding.ActivityCreatePlayerBinding;
-import com.example.multigame.manager.PlayerManager;
-import com.example.multigame.model.Player;
-import com.example.multigame.utils.ActivityUtils;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.squareup.picasso.Picasso;
 
 public class CreatePlayerActivity extends AppCompatActivity {
-
     private static final int REQUEST_IMAGE = 7;
     private static final int REQUEST_LOCALISATION_PERMISSION = 2001;
     private ActivityCreatePlayerBinding binding;
@@ -41,6 +42,7 @@ public class CreatePlayerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
+                //startActivityForResult(Intent.createChooser(intent,"Choix de la photo"), REQUEST_IMAGE);
                 startActivityForResult(intent, REQUEST_IMAGE);
             }
         });
@@ -62,7 +64,7 @@ public class CreatePlayerActivity extends AppCompatActivity {
         binding.createPlayerPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityUtils.launchActivity(CreatePlayerActivity.this, DisplayPlayerActivity.class,false, true);
+                ActivityUtils.launchActivityWithSlide(CreatePlayerActivity.this, DisplayPlayerActivity.class,false, true);
             }
         });
 
@@ -73,21 +75,33 @@ public class CreatePlayerActivity extends AppCompatActivity {
                         && !binding.createPlayerFirstname.getText().toString().isEmpty()
                         && !binding.createPlayerAge.getText().toString().isEmpty()
                         && !binding.createPlayerLocalisation.getText().toString().isEmpty()
-                        && pictureUrl != null) {
-                    Player player = new Player(pictureUrl, binding.createPlayerName.getText().toString(),
+                        && pictureUrl != null
+                ){
+                    Player player = new Player(
+                            pictureUrl,
+                            binding.createPlayerName.getText().toString(),
                             binding.createPlayerFirstname.getText().toString(),
                             Integer.parseInt(binding.createPlayerAge.getText().toString()),
-                            binding.createPlayerLocalisation.getText().toString());
+                            binding.createPlayerLocalisation.getText().toString()
+                    );
+
                     AppDatabase.getDatabase(CreatePlayerActivity.this).appDao().insert(player);
-                    PlayerManager.getInstance().setPlayer(player);
-                    ActivityUtils.launchActivity(CreatePlayerActivity.this, MainActivity.class,true, true);
+
                 } else {
-                    Toast.makeText(CreatePlayerActivity.this, "Informations manquantes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreatePlayerActivity.this, "information manquantes", Toast.LENGTH_SHORT).show();
                 }
+
+
+                Player player = new Player(
+                        pictureUrl,
+                        binding.createPlayerName.getText().toString(),
+                        binding.createPlayerFirstname.getText().toString(),
+                        Integer.parseInt(binding.createPlayerAge.getText().toString()),
+                        binding.createPlayerLocalisation.getText().toString()
+                );
             }
         });
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -95,11 +109,10 @@ public class CreatePlayerActivity extends AppCompatActivity {
             getUserLocation();
         }
     }
-
     private void getUserLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         LocationServices.getFusedLocationProviderClient(this).getLastLocation()
@@ -113,20 +126,18 @@ public class CreatePlayerActivity extends AppCompatActivity {
                     }
                 });
     }
-
     private boolean checkLocationAuthorized() {
         return ActivityCompat.checkSelfPermission(CreatePlayerActivity.this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(CreatePlayerActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE && resultCode == RESULT_OK) {
             Picasso.get().load(data.getData()).centerCrop().fit().into(binding.createPlayerImage);
-            pictureUrl = data.getDataString();
+            pictureUrl = data.getData().toString();
         }
     }
 }

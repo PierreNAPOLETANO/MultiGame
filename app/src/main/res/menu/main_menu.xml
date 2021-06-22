@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/drag"
+            android:title="@string/drag_n_drop"/>
+
+    <item
+        android:id="@+id/fast"
+        android:title="@string/fast_tap"/>
+
+    <item
+        android:id="@+id/swipe"
+        android:title="@string/swipe"/>
+
+    <item
+        android:id="@+id/ipac"
+        android:title="@string/ipac_fragment"/>
+
+    <item
+        android:id="@+id/settings"
+        android:title="@string/settings"/>
+</menu>
